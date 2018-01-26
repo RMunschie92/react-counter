@@ -10,25 +10,39 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
       <script type="text/babel">
-          function getWelcome(location) {
-            return location.city + ', ' + location.state
+        class WelcomeTo extends React.Component {
+
+          constructor(props) {
+            super(props);
+            this.state = {
+              weather: "Sunny yet still below freezing"
+            }
           }
 
-          const location = {
-            city: 'Boston',
-            state: 'Massachusetts',
-          };
+          render() {
+            return(
+              <div>
+                <h1> Welcome to {this.props.city}, {this.props.state}!</h1>
+                <h2> The weather today is {this.state.weather}. </h2>
+              </div>
+            );
+          }
+        }
 
+        const location = {
+          city: 'Boston',
+          state: 'Massachusetts',
+        };
 
-          const element = (
-            <div>
-              <h1>Welcome to {getWelcome(location)}!</h1>
-            </div>
-          );
+        WelcomeTo.defaultProps = {
+          city: 'New York',
+          state: 'New York',
+        };
 
         ReactDOM.render(
-          element,
-          document.getElementById('app')
+          <WelcomeTo
+            city={location.city}
+            state ={location.state}/>,document.getElementById('app')
         );
        </script>
      </body>
